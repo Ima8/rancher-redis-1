@@ -19,4 +19,4 @@ sed -i s/%sentinel_port%/$sentinel_port/g /etc/redis/sentinel.conf
 sed -i s/%redis_port%/$redis_port/g /etc/redis/sentinel.conf
 sed -i s/%master_ip%/$master_ip/g /etc/redis/sentinel.conf
 
-redis-sentinel /etc/redis/sentinel.conf
+exec redis-sentinel /etc/redis/sentinel.conf
