@@ -1,6 +1,13 @@
-redis:
-  scale: 3
-redis-sentinel:
-  scale: 3
-#webdis:
-#  scale: 1
+version: '2'
+services:
+  redis-sentinel:
+    retain_ip: true
+    scale: 3
+    start_on_create: true
+  client:
+    scale: 1
+    start_on_create: true
+  redis:
+    retain_ip: true
+    scale: 3
+    start_on_create: true

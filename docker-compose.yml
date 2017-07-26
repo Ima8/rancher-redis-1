@@ -1,14 +1,21 @@
-redis:
-  image: clescot/rancher-redis:28
-  labels:
-    io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
-    io.rancher.sidekicks: redis-data
-  volumes:
-   - redis-data:/data
-
-redis-sentinel:
-  image: clescot/rancher-redis-sentinel:3
-  ports:
-   - "26379"
-  labels:
-    io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+version: '2'
+services:
+  redis-sentinel:
+    image: monachus/rancher-redis-sentinel:latest
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+    io.rancher.container.pull_image: always
+  client:
+    image: monachus/sak
+    stdin_open: true
+    tty: true
+    labels:
+      io.rancher.container.pull_image: always
+  redis:
+    image: monachus/rancher-redis:latest
+    volumes:
+    - /data
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
