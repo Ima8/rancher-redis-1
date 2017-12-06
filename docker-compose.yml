@@ -15,7 +15,7 @@ services:
   redis:
     image: monachus/rancher-redis:latest
     volumes:
-    - /data
+    - redis-data:/data
     labels:
       io.rancher.container.pull_image: always
       io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
